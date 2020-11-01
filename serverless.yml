@@ -1,0 +1,22 @@
+service: pdf
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+
+functions:
+  handler:
+    handler: handler.handler
+    memorySize: 1600
+    timeout: 30
+    events:
+      - http:
+          path: users/create
+          method: get
+
+package:
+  exclude:
+    - node_modules/puppeteer/.local-chromium/**
